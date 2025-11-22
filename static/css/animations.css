@@ -1,0 +1,272 @@
+/* Heartbeat Animation */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Progress Fill */
+@keyframes progressFill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-out;
+}
+
+/* Rose Petals */
+.rose-petal {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #e91e63;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  opacity: 0.7;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Heart Glow */
+.heart-glow {
+  width: 100px;
+  height: 100px;
+  background: #e91e63;
+  position: relative;
+  transform: rotate(45deg);
+  margin: 2rem auto;
+  animation: pulse 2s infinite;
+}
+
+.heart-glow:before,
+.heart-glow:after {
+  content: "";
+  width: 100px;
+  height: 100px;
+  background: #e91e63;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart-glow:before {
+  top: -50px;
+  left: 0;
+}
+
+.heart-glow:after {
+  top: 0;
+  left: -50px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: rotate(45deg) scale(1);
+  }
+  50% {
+    transform: rotate(45deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(45deg) scale(1);
+  }
+}
+
+/* Floating Compliments */
+.floating-compliment {
+  position: absolute;
+  background: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  animation: floatAround 20s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes floatAround {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(100px, 100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Card Hover Effects */
+.feature-card,
+.memory-box {
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover,
+.memory-box:hover {
+  transform: translateY(-5px) rotate(1deg);
+  box-shadow: 0 10px 25px var(--glow-color);
+}
+
+/* Star Animation */
+.star {
+  width: 100px;
+  height: 100px;
+  background: gold;
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  animation: twinkle 2s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 0 30px gold;
+  }
+}
+
+/* Gift Opening Animation */
+.gift-box {
+  width: 200px;
+  height: 200px;
+  background: var(--primary-color);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.gift-lid {
+  width: 220px;
+  height: 50px;
+  background: var(--accent-color);
+  position: absolute;
+  top: -50px;
+  left: -10px;
+  transition: all 0.5s ease;
+}
+
+.gift-box.open .gift-lid {
+  transform: rotate(-15deg) translateY(-100px);
+  opacity: 0;
+}
+
+.gift-content {
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.5s ease 0.3s;
+}
+
+.gift-box.open .gift-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Burst Animation */
+@keyframes burst {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.burst {
+  animation: burst 0.5s ease-out;
+}
+
+/* Theme Transition */
+body,
+.feature-card,
+.memory-box,
+.letter-paper {
+  transition: all 0.5s ease;
+}
+
+/* Loading Petals */
+.rose-petals-loading {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 2rem auto;
+}
+
+.rose-petals-loading::before,
+.rose-petals-loading::after {
+  content: "🌸";
+  position: absolute;
+  font-size: 3rem;
+  animation: swirl 3s linear infinite;
+}
+
+.rose-petals-loading::after {
+  animation-delay: 1.5s;
+}
+
+@keyframes swirl {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(50px, 50px) rotate(180deg) scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg) scale(1);
+    opacity: 1;
+  }
+}

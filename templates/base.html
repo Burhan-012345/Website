@@ -16,6 +16,10 @@
       href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body class="theme-rose">
     <!-- Rose Petals Container -->
@@ -24,32 +28,126 @@
     <!-- Floating Compliments -->
     <div id="floatingCompliments"></div>
 
-    <!-- Music Toggle -->
-    <div class="music-toggle">
-      <button id="musicToggle" onclick="toggleMusic()">🎵 Music Off</button>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <div class="menu-overlay">
+        <div class="menu-content">
+          <div class="menu-header">
+            <h3>Meri Duniya 💖</h3>
+            <p>Aapke liye khaas pal</p>
+          </div>
+
+          <nav class="menu-nav">
+            <a href="{{ url_for('home') }}" class="menu-item">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+            </a>
+            <a href="{{ url_for('love_letter') }}" class="menu-item">
+              <i class="fas fa-heart"></i>
+              <span>Love Letter</span>
+            </a>
+            <a href="{{ url_for('reasons') }}" class="menu-item">
+              <i class="fas fa-star"></i>
+              <span>Reasons</span>
+            </a>
+            <a href="{{ url_for('star') }}" class="menu-item">
+              <i class="fas fa-moon"></i>
+              <span>Star of My Life</span>
+            </a>
+            <a href="{{ url_for('gift') }}" class="menu-item">
+              <i class="fas fa-gift"></i>
+              <span>Surprise Gift</span>
+            </a>
+            <a href="{{ url_for('quiz') }}" class="menu-item">
+              <i class="fas fa-question-circle"></i>
+              <span>Love Quiz</span>
+            </a>
+            <a href="{{ url_for('memory') }}" class="menu-item">
+              <i class="fas fa-box"></i>
+              <span>Memory Vault</span>
+            </a>
+          </nav>
+
+          <div class="menu-footer">
+            <div class="theme-selector-menu">
+              <button onclick="changeTheme('rose')" class="theme-btn">
+                <i class="fas fa-rose"></i> Rose
+              </button>
+              <button onclick="changeTheme('midnight')" class="theme-btn">
+                <i class="fas fa-moon"></i> Midnight
+              </button>
+              <button onclick="changeTheme('pink')" class="theme-btn">
+                <i class="fas fa-heart"></i> Pink
+              </button>
+              <button onclick="changeTheme('gold')" class="theme-btn">
+                <i class="fas fa-crown"></i> Gold
+              </button>
+            </div>
+
+            <div class="music-toggle-menu">
+              <button
+                id="musicToggleMenu"
+                onclick="toggleMusic()"
+                class="music-btn"
+              >
+                <i class="fas fa-music"></i>
+                <span id="musicText">Music Off</span>
+              </button>
+            </div>
+
+            <!-- In the menu-footer section, replace the logout button -->
+            <div class="menu-actions">
+              <button onclick="makeItRainRoses()" class="action-btn">
+                <i class="fas fa-rose"></i> More Roses
+              </button>
+              <a
+                href="{{ url_for('logout') }}"
+                class="action-btn logout-btn"
+                onclick="handleLock()"
+              >
+                <i class="fas fa-lock"></i> Lock
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Theme Selector -->
-    <div class="theme-selector">
-      <button onclick="changeTheme('rose')">🌹 Rose</button>
-      <button onclick="changeTheme('midnight')">🌙 Midnight</button>
-      <button onclick="changeTheme('pink')">💗 Pink</button>
-      <button onclick="changeTheme('gold')">🕯️ Gold</button>
+    <!-- Music Toggle (Floating) -->
+    <div class="music-toggle-floating">
+      <button
+        id="musicToggle"
+        onclick="toggleMusic()"
+        class="music-btn-floating"
+      >
+        <i class="fas fa-music"></i>
+      </button>
+    </div>
+
+    <!-- Theme Toggle (Floating) -->
+    <div class="theme-toggle-floating">
+      <button onclick="toggleThemeMenu()" class="theme-btn-floating">
+        <i class="fas fa-palette"></i>
+      </button>
+      <div class="theme-options" id="themeOptions">
+        <button onclick="changeTheme('rose')" class="theme-option">🌹</button>
+        <button onclick="changeTheme('midnight')" class="theme-option">
+          🌙
+        </button>
+        <button onclick="changeTheme('pink')" class="theme-option">💗</button>
+        <button onclick="changeTheme('gold')" class="theme-option">🕯️</button>
+      </div>
     </div>
 
     <!-- Main Content -->
     <div class="container">{% block content %}{% endblock %}</div>
-
-    <!-- Navigation -->
-    <nav class="main-nav">
-      <a href="{{ url_for('home') }}">🏠 Home</a>
-      <a href="{{ url_for('love_letter') }}">💌 Letter</a>
-      <a href="{{ url_for('reasons') }}">❣️ Reasons</a>
-      <a href="{{ url_for('star') }}">⭐ Star</a>
-      <a href="{{ url_for('gift') }}">🎁 Gift</a>
-      <a href="{{ url_for('quiz') }}">💘 Quiz</a>
-      <a href="{{ url_for('memory') }}">📦 Memory</a>
-    </nav>
 
     <!-- Audio Element -->
     <audio id="bgMusic" loop>

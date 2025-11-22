@@ -1,0 +1,698 @@
+{% extends "base.html" %} {% block content %}
+<div class="quiz-page">
+  <div class="quiz-header">
+    <h1>Hum Dono Ka Pyaar Quiz 💑</h1>
+    <p class="romantic-subtitle">
+      Aaiye dekhte hain kitna jaante hain aap humare bare mein!
+    </p>
+  </div>
+
+  <div class="quiz-container" id="quizContainer">
+    <form id="loveQuiz" class="quiz-form">
+      <!-- Question 1 -->
+      <div class="quiz-question active" data-question="1">
+        <div class="question-header">
+          <span class="question-number">1</span>
+          <h3>Pehli mulaqat mein aapko dekhkar mera pehla khayal kya tha?</h3>
+        </div>
+        <div class="options-container">
+          <label class="option-card">
+            <input type="radio" name="q1" value="A" />
+            <div class="option-content">
+              <span class="option-icon">😍</span>
+              <span class="option-text">"Waah! Kitni khoobsurat hain!"</span>
+            </div>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="q1" value="B" />
+            <div class="option-content">
+              <span class="option-icon">🤔</span>
+              <span class="option-text">"Inse baat karni chahiye"</span>
+            </div>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="q1" value="C" />
+            <div class="option-content">
+              <span class="option-icon">💖</span>
+              <span class="option-text">"Yahi meri life partner hai"</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="quiz-question" data-question="2">
+        <div class="question-header">
+          <span class="question-number">2</span>
+          <h3>Aapki sabse pasandeed cheez mere andar kya hai?</h3>
+        </div>
+        <div class="options-container">
+          <label class="option-card">
+            <input type="radio" name="q2" value="A" />
+            <div class="option-content">
+              <span class="option-icon">😊</span>
+              <span class="option-text">Aapki muskurahat</span>
+            </div>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="q2" value="B" />
+            <div class="option-content">
+              <span class="option-icon">🤗</span>
+              <span class="option-text">Aapka pyaar bhara vyavahar</span>
+            </div>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="q2" value="C" />
+            <div class="option-content">
+              <span class="option-icon">💕</span>
+              <span class="option-text">Aapka dekhne ka tareeka</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="quiz-question" data-question="3">
+        <div class="question-header">
+          <span class="question-number">3</span>
+          <h3>Humari relationship ki sabse khoobsurat baat kya hai?</h3>
+        </div>
+        <div class="options-container">
+          <label class="option-card">
+            <input type="radio" name="q3" value="A" />
+            <div class="option-content">
+              <span class="option-icon">🤝</span>
+              <span class="option-text">Ek dusre ki understanding</span>
+            </div>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="q3" value="B" />
+            <div class="option-content">
+              <span class="option-icon">💞</span>
+              <span class="option-text">Behad pyaar</span>
+            </div>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="q3" value="C" />
+            <div class="option-content">
+              <span class="option-icon">🌟</span>
+              <span class="option-text">Trust aur respect</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="quiz-question" data-question="4">
+        <div class="question-header">
+          <span class="question-number">4</span>
+          <h3>Aapke liye meri sabse pyaari aadat kya hai?</h3>
+        </div>
+        <div class="options-container">
+          <label class="option-card">
+            <input type="radio" name="q4" value="A" />
+            <div class="option-content">
+              <span class="option-icon">☕</span>
+              <span class="option-text">Aapki chai banane ki aadat</span>
+            </div>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="q4" value="B" />
+            <div class="option-content">
+              <span class="option-icon">📞</span>
+              <span class="option-text">Regular call karna</span>
+            </div>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="q4" value="C" />
+            <div class="option-content">
+              <span class="option-icon">💝</span>
+              <span class="option-text">Surprise dena</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="quiz-question" data-question="5">
+        <div class="question-header">
+          <span class="question-number">5</span>
+          <h3>Hum dono ka sapna kya hai?</h3>
+        </div>
+        <div class="options-container">
+          <label class="option-card">
+            <input type="radio" name="q5" value="A" />
+            <div class="option-content">
+              <span class="option-icon">🏡</span>
+              <span class="option-text">Ek sundar sa ghar banana</span>
+            </div>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="q5" value="B" />
+            <div class="option-content">
+              <span class="option-icon">🌍</span>
+              <span class="option-text">Duniya ghumna</span>
+            </div>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="q5" value="C" />
+            <div class="option-content">
+              <span class="option-icon">💑</span>
+              <span class="option-text">Hamesha saath rehna</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="quiz-navigation">
+        <button
+          type="button"
+          class="nav-btn prev-btn"
+          onclick="prevQuestion()"
+          disabled
+        >
+          ← Previous
+        </button>
+        <button type="button" class="nav-btn next-btn" onclick="nextQuestion()">
+          Next →
+        </button>
+        <button type="submit" class="submit-btn" style="display: none">
+          Result 💖
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="quiz-result" id="quizResult" style="display: none">
+    <div class="result-content">
+      <div class="result-header">
+        <h2>Quiz Result! 🎉</h2>
+        <div class="score-display">
+          <div class="score-circle">
+            <span class="score" id="finalScore">0</span>
+            <span class="score-label">/ 10</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-message">
+        <p id="resultText" class="handwritten"></p>
+      </div>
+
+      <div class="result-actions">
+        <button onclick="retakeQuiz()" class="retake-btn">
+          🔄 Phir Se Karein
+        </button>
+        <button onclick="shareResult()" class="share-result-btn">
+          📤 Result Share Karein
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="floating-hearts-quiz"></div>
+</div>
+
+<style>
+  .quiz-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 50%, #e91e63 100%);
+    padding: 2rem;
+  }
+
+  .quiz-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .quiz-header h1 {
+    font-family: "Dancing Script", cursive;
+    font-size: 3rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1rem;
+  }
+
+  .romantic-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+  }
+
+  .quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .quiz-question {
+    display: none;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .quiz-question.active {
+    display: block;
+  }
+
+  .question-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--secondary-color);
+  }
+
+  .question-number {
+    background: var(--primary-color);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+
+  .question-header h3 {
+    color: var(--text-color);
+    font-size: 1.3rem;
+    margin: 0;
+  }
+
+  .options-container {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .option-card {
+    display: block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .option-card input {
+    display: none;
+  }
+
+  .option-content {
+    background: var(--background-color);
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .option-card:hover .option-content {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .option-card input:checked + .option-content {
+    border-color: var(--primary-color);
+    background: var(--secondary-color);
+    transform: scale(1.02);
+  }
+
+  .option-icon {
+    font-size: 1.5rem;
+  }
+
+  .option-text {
+    font-size: 1.1rem;
+    color: var(--text-color);
+  }
+
+  .quiz-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+  }
+
+  .nav-btn,
+  .submit-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+  }
+
+  .nav-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+
+  .nav-btn:hover:not(:disabled),
+  .submit-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px var(--glow-color);
+  }
+
+  .prev-btn {
+    background: var(--accent-color);
+  }
+
+  .submit-btn {
+    background: #4caf50;
+  }
+
+  .quiz-result {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: white;
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .result-header h2 {
+    font-family: "Dancing Script", cursive;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+  }
+
+  .score-display {
+    margin-bottom: 2rem;
+  }
+
+  .score-circle {
+    width: 120px;
+    height: 120px;
+    border: 5px solid var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background: var(--secondary-color);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .score {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+
+  .score-label {
+    color: var(--text-color);
+    opacity: 0.7;
+  }
+
+  .result-message {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: var(--background-color);
+    border-radius: 15px;
+    border-left: 4px solid var(--primary-color);
+  }
+
+  #resultText {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    text-align: left;
+    margin: 0;
+  }
+
+  .result-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .retake-btn,
+  .share-result-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+  }
+
+  .retake-btn:hover,
+  .share-result-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px var(--glow-color);
+  }
+
+  .share-result-btn {
+    background: var(--accent-color);
+  }
+
+  .floating-hearts-quiz {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+</style>
+
+<script>
+  let currentQuestion = 1;
+  const totalQuestions = 5;
+
+  function showQuestion(questionNum) {
+    // Hide all questions
+    document.querySelectorAll(".quiz-question").forEach((q) => {
+      q.classList.remove("active");
+    });
+
+    // Show current question
+    document
+      .querySelector(`[data-question="${questionNum}"]`)
+      .classList.add("active");
+
+    // Update navigation buttons
+    updateNavigation();
+  }
+
+  function nextQuestion() {
+    if (currentQuestion < totalQuestions) {
+      currentQuestion++;
+      showQuestion(currentQuestion);
+      createHeartAnimation();
+    }
+  }
+
+  function prevQuestion() {
+    if (currentQuestion > 1) {
+      currentQuestion--;
+      showQuestion(currentQuestion);
+    }
+  }
+
+  function updateNavigation() {
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+    const submitBtn = document.querySelector(".submit-btn");
+
+    prevBtn.disabled = currentQuestion === 1;
+
+    if (currentQuestion === totalQuestions) {
+      nextBtn.style.display = "none";
+      submitBtn.style.display = "block";
+    } else {
+      nextBtn.style.display = "block";
+      submitBtn.style.display = "none";
+    }
+  }
+
+  function createHeartAnimation() {
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => {
+        const heart = document.createElement("div");
+        heart.innerHTML = "💖";
+        heart.style.cssText = `
+                position: fixed;
+                font-size: 20px;
+                left: ${Math.random() * 100}%;
+                top: 100%;
+                animation: heartFloat 3s ease-in forwards;
+                pointer-events: none;
+                z-index: 9999;
+            `;
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3000);
+      }, i * 200);
+    }
+  }
+
+  // Handle form submission
+  document.getElementById("loveQuiz").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const answers = {};
+
+    for (let [key, value] of formData.entries()) {
+      answers[key] = value;
+    }
+
+    // Calculate score
+    const score = calculateScore(answers);
+    showResult(score);
+  });
+
+  function calculateScore(answers) {
+    let score = 0;
+    const scoring = {
+      q1: { A: 2, B: 1, C: 2 },
+      q2: { A: 2, B: 2, C: 1 },
+      q3: { A: 1, B: 2, C: 2 },
+      q4: { A: 2, B: 1, C: 2 },
+      q5: { A: 2, B: 1, C: 2 },
+    };
+
+    for (const [question, answer] of Object.entries(answers)) {
+      score += scoring[question][answer] || 0;
+    }
+
+    return Math.min(score, 10);
+  }
+
+  function showResult(score) {
+    const quizContainer = document.getElementById("quizContainer");
+    const resultContainer = document.getElementById("quizResult");
+    const finalScore = document.getElementById("finalScore");
+    const resultText = document.getElementById("resultText");
+
+    finalScore.textContent = score;
+
+    // Get result message based on score
+    const messages = {
+      10: "Waah! Aap to perfect couple ho! Aap dono ka pyaar dekhkar lagta hai jaise aap ek dusre ke liye hi bane ho. Aapki understanding aur pyaar sabse alag hai. Aap dono hamesha khush rahein! 💑",
+      8: "Bahut khoob! Aap dono ka rishta bahut gehara hai. Aap ek dusre ko acchi tarah samajhte hain aur aapka pyaar har roz badhta ja raha hai. Yeh rishta hamesha qayam rahe! 🌟",
+      6: "Achha score hai! Aap dono mein accha understanding hai. Thoda aur time dijiye, aap dono ka rishta aur bhi gehara ho jayega. Pyaar badhta rahe! 💕",
+      4: "Aap dono abhi ek dusre ko samajh rahe hain. Koi baat nahi, pyaar mein time lagta hai. Aap dono ka rishta zaroor age badhega! 🌹",
+    };
+
+    let message =
+      "Aap dono ka rishta naya hai, lekin pyaar mein dum hai! Thoda aur time dijiye, aap dono ek dusre ke liye perfect ho jayenge! 💖";
+
+    for (const [threshold, msg] of Object.entries(messages)) {
+      if (score >= parseInt(threshold)) {
+        message = msg;
+        break;
+      }
+    }
+
+    resultText.textContent = message;
+
+    quizContainer.style.display = "none";
+    resultContainer.style.display = "block";
+
+    // Celebration
+    createCelebration();
+  }
+
+  function createCelebration() {
+    // Create floating hearts
+    for (let i = 0; i < 10; i++) {
+      setTimeout(() => {
+        createHeartAnimation();
+      }, i * 300);
+    }
+
+    // Create result celebration
+    if (window.romanticAnimations) {
+      window.romanticAnimations.createConfetti();
+    }
+  }
+
+  function retakeQuiz() {
+    currentQuestion = 1;
+    document.getElementById("loveQuiz").reset();
+    document.getElementById("quizContainer").style.display = "block";
+    document.getElementById("quizResult").style.display = "none";
+    showQuestion(1);
+  }
+
+  function shareResult() {
+    const score = document.getElementById("finalScore").textContent;
+    alert(
+      `Mera pyaar quiz score hai ${score}/10! 💖\n\nAap bhi apne partner ke saath yeh quiz khelein!`
+    );
+  }
+
+  // Add heart float animation to style
+  const quizAnimations = document.createElement("style");
+  quizAnimations.textContent = `
+    @keyframes heartFloat {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+`;
+  document.head.appendChild(quizAnimations);
+
+  document.addEventListener("DOMContentLoaded", function () {
+    showQuestion(1);
+  });
+</script>
+{% endblock %}

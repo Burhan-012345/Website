@@ -1,0 +1,540 @@
+{% extends "base.html" %} {% block content %}
+<div class="reasons-page">
+  <div class="reasons-header">
+    <h1>Kyun Pyaar Karta Hoon Aapse 💕</h1>
+    <p class="romantic-subtitle">
+      Infinite reasons, but here are some that make my heart skip a beat
+    </p>
+  </div>
+
+  <div class="reasons-carousel">
+    <div class="carousel-container" id="carouselContainer">
+      <!-- Reason cards will be generated here -->
+    </div>
+
+    <div class="carousel-controls">
+      <button class="carousel-btn prev-btn" onclick="prevCard()">←</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+      <button class="carousel-btn next-btn" onclick="nextCard()">→</button>
+    </div>
+  </div>
+
+  <div class="reasons-counter">
+    <div class="counter-display">
+      <span class="counter-number" id="currentReason">1</span>
+      <span class="counter-total">/ 10</span>
+    </div>
+    <div class="counter-label">Reasons of Infinite Love</div>
+  </div>
+
+  <div class="love-meter-reasons">
+    <h3>Mera Pyaar Aapke Liye</h3>
+    <div class="meter-container">
+      <div class="meter-fill" style="width: 100%"></div>
+    </div>
+    <p class="meter-text">Always overflowing! 💖</p>
+  </div>
+
+  <div class="floating-hearts-reasons"></div>
+</div>
+
+<style>
+  .reasons-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fff5f7 0%, #fce4ec 50%, #f8bbd9 100%);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .reasons-header {
+    margin-bottom: 3rem;
+  }
+
+  .reasons-header h1 {
+    font-family: "Dancing Script", cursive;
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .romantic-subtitle {
+    color: var(--text-color);
+    opacity: 0.8;
+    font-size: 1.2rem;
+  }
+
+  .reasons-carousel {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    position: relative;
+  }
+
+  .carousel-container {
+    display: flex;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: white;
+    min-height: 400px;
+  }
+
+  .reason-card {
+    min-width: 100%;
+    padding: 3rem;
+    display: none;
+    animation: fadeIn 0.5s ease;
+    text-align: center;
+  }
+
+  .reason-card.active {
+    display: block;
+  }
+
+  .reason-icon {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    display: block;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  .reason-content h3 {
+    font-family: "Dancing Script", cursive;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .reason-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+  }
+
+  .reason-number {
+    background: var(--primary-color);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-weight: bold;
+  }
+
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .carousel-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px var(--glow-color);
+  }
+
+  .carousel-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ccc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background: var(--primary-color);
+    transform: scale(1.2);
+  }
+
+  .reasons-counter {
+    margin-bottom: 3rem;
+  }
+
+  .counter-display {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .counter-number {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    font-family: "Dancing Script", cursive;
+  }
+
+  .counter-total {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    opacity: 0.7;
+  }
+
+  .counter-label {
+    color: var(--text-color);
+    opacity: 0.8;
+    font-size: 1.1rem;
+  }
+
+  .love-meter-reasons {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .love-meter-reasons h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-family: "Dancing Script", cursive;
+    font-size: 1.8rem;
+  }
+
+  .meter-container {
+    width: 100%;
+    height: 20px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    margin: 1rem 0;
+    overflow: hidden;
+  }
+
+  .meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #e91e63, #ff4081);
+    border-radius: 10px;
+    transition: width 2s ease;
+  }
+
+  .meter-text {
+    color: var(--text-color);
+    opacity: 0.8;
+    font-style: italic;
+  }
+
+  .floating-hearts-reasons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* Card hover effects */
+  .reason-card {
+    transition: all 0.3s ease;
+  }
+
+  .reason-card:hover {
+    transform: scale(1.02);
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .reasons-header h1 {
+      font-size: 2rem;
+    }
+
+    .reason-card {
+      padding: 2rem 1rem;
+    }
+
+    .reason-icon {
+      font-size: 3rem;
+    }
+
+    .reason-content h3 {
+      font-size: 1.5rem;
+    }
+
+    .carousel-controls {
+      gap: 1rem;
+    }
+  }
+</style>
+
+<script>
+  // Reasons data
+  const reasons = [
+    {
+      number: 1,
+      icon: "😊",
+      title: "Aapki Muskurahat",
+      reason:
+        "Aapki muskurahat dekhkar meri poori duniya roshan ho jaati hai. Woh pyaar bhali hansi mere dil ko chhoo jaati hai, har gum ko door kar deti hai.",
+    },
+    {
+      number: 2,
+      icon: "💖",
+      title: "Aapka Dil",
+      reason:
+        "Aapka dil itna saaf hai, itna pyaar se bhara hua hai. Aapki har baat, har ehsaas mein sachcha pyaar jhalakta hai.",
+    },
+    {
+      number: 3,
+      icon: "🌟",
+      title: "Aapki Soch",
+      reason:
+        "Aapki soch itni khoobsurat hai, aap har cheez ko itne pyaar se dekhti hain. Aapki har baat mein gehraai hoti hai.",
+    },
+    {
+      number: 4,
+      icon: "🤗",
+      title: "Aapka Sahara",
+      reason:
+        "Har mushkil waqt mein aapka sahana milna, aapka haath thamna... yeh sabse bada reason hai aapse pyaar karne ka.",
+    },
+    {
+      number: 5,
+      icon: "🎨",
+      title: "Aapki Kala",
+      reason:
+        "Aap har cheez ko itni khoobsurati se karti hain, jaise zindagi ek canvas ho aur aap uspe pyaar ki painting bana rahi hain.",
+    },
+    {
+      number: 6,
+      icon: "💫",
+      title: "Aapka Andaaz",
+      reason:
+        "Aapka baat karne ka andaaz, chalne ka tareeka, har cheez mein ek alag hi jaadu hai. Aapki har ada dil chura leti hai.",
+    },
+    {
+      number: 7,
+      icon: "🌹",
+      title: "Aapki Mohabbat",
+      reason:
+        "Aapki mohabbat mein woh jaadu hai jo har dard ko bhula deti hai, har pal ko khoobsurat bana deti hai.",
+    },
+    {
+      number: 8,
+      icon: "📚",
+      title: "Aapki Samajh",
+      reason:
+        "Aap har baat ko itni acchi tarah samajhti hain, aapki understanding mere liye sabse khoobsurat tohfa hai.",
+    },
+    {
+      number: 9,
+      icon: "🎵",
+      title: "Aapki Aawaz",
+      reason:
+        "Aapki aawaz mein woh madhurta hai jo dil ko sukoon deti hai, jaise koi pyaari si dhun ho.",
+    },
+    {
+      number: 10,
+      icon: "💝",
+      title: "Bas Aap Ho",
+      reason:
+        "Sabse bada reason yehi hai ki aap aap hain. Aapke andar woh sab kuch hai jo ek perfect partner mein hona chahiye.",
+    },
+  ];
+
+  let currentCard = 0;
+
+  function initializeCarousel() {
+    const carouselContainer = document.getElementById("carouselContainer");
+    const carouselDots = document.getElementById("carouselDots");
+
+    // Clear existing content
+    carouselContainer.innerHTML = "";
+    carouselDots.innerHTML = "";
+
+    // Create reason cards
+    reasons.forEach((reason, index) => {
+      const card = document.createElement("div");
+      card.className = `reason-card ${index === 0 ? "active" : ""}`;
+      card.innerHTML = `
+            <span class="reason-icon">${reason.icon}</span>
+            <div class="reason-content">
+                <h3>${reason.title}</h3>
+                <p class="reason-text handwritten">${reason.reason}</p>
+                <div class="reason-number">${reason.number}</div>
+            </div>
+        `;
+      carouselContainer.appendChild(card);
+
+      // Create dot
+      const dot = document.createElement("div");
+      dot.className = `dot ${index === 0 ? "active" : ""}`;
+      dot.addEventListener("click", () => showCard(index));
+      carouselDots.appendChild(dot);
+    });
+
+    updateCounter();
+  }
+
+  function showCard(index) {
+    // Hide all cards
+    document.querySelectorAll(".reason-card").forEach((card) => {
+      card.classList.remove("active");
+    });
+
+    // Remove active class from all dots
+    document.querySelectorAll(".dot").forEach((dot) => {
+      dot.classList.remove("active");
+    });
+
+    // Show selected card
+    document.querySelectorAll(".reason-card")[index].classList.add("active");
+    document.querySelectorAll(".dot")[index].classList.add("active");
+
+    currentCard = index;
+    updateCounter();
+
+    // Create heart animation
+    createHeartAnimation();
+  }
+
+  function nextCard() {
+    let nextIndex = currentCard + 1;
+    if (nextIndex >= reasons.length) {
+      nextIndex = 0; // Loop back to first card
+    }
+    showCard(nextIndex);
+  }
+
+  function prevCard() {
+    let prevIndex = currentCard - 1;
+    if (prevIndex < 0) {
+      prevIndex = reasons.length - 1; // Loop to last card
+    }
+    showCard(prevIndex);
+  }
+
+  function updateCounter() {
+    const currentReasonElement = document.getElementById("currentReason");
+    currentReasonElement.textContent = currentCard + 1;
+
+    // Add animation to counter
+    currentReasonElement.style.animation = "none";
+    setTimeout(() => {
+      currentReasonElement.style.animation = "pulse 0.5s ease";
+    }, 10);
+  }
+
+  function createHeartAnimation() {
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => {
+        const heart = document.createElement("div");
+        heart.innerHTML = "💖";
+        heart.style.cssText = `
+                position: fixed;
+                font-size: 20px;
+                left: ${Math.random() * 100}%;
+                top: 100%;
+                animation: heartFloat 3s ease-in forwards;
+                pointer-events: none;
+                z-index: 9999;
+            `;
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3000);
+      }, i * 200);
+    }
+  }
+
+  // Auto-advance carousel
+  let autoAdvance = setInterval(nextCard, 5000);
+
+  // Pause auto-advance on hover
+  document
+    .querySelector(".reasons-carousel")
+    .addEventListener("mouseenter", () => {
+      clearInterval(autoAdvance);
+    });
+
+  // Resume auto-advance when mouse leaves
+  document
+    .querySelector(".reasons-carousel")
+    .addEventListener("mouseleave", () => {
+      autoAdvance = setInterval(nextCard, 5000);
+    });
+
+  // Add carousel animations to style
+  const carouselAnimations = document.createElement("style");
+  carouselAnimations.textContent = `
+    @keyframes heartFloat {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+`;
+  document.head.appendChild(carouselAnimations);
+
+  // Keyboard navigation
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+      prevCard();
+    } else if (e.key === "ArrowRight") {
+      nextCard();
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    initializeCarousel();
+  });
+</script>
+{% endblock %}

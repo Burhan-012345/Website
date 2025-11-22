@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block content %}
+<div class="letter-container">
+  <div class="letter-paper">
+    <div class="letter-header">
+      <h2>{{ letter.title if letter else 'Aapke Naam Pyaar Bhara Khat' }}</h2>
+      <div class="letter-date">
+        {{ now.strftime('%d %B, %Y') if now else 'Aaj' }}
+      </div>
+    </div>
+
+    <div class="letter-content handwritten">
+      {{ letter.content if letter else ''' Pyaari [Her Name], Aapko yeh khat
+      likhkar mere dil ko bahut sukoon mil raha hai. Aapki yaad aati hai to
+      lagta hai jaise koi khoobsurat sapna dekh raha hoon. Aap mere liye sirf ek
+      shaks nahi, aap to meri duaon ka jawab ho, meri har khwahish ka anjaam ho,
+      meri zindagi ki sabse khoobsurat shuruaat ho. Aapke bina har pal adhura
+      lagta hai, jaise kuch kho gaya ho. Aapki muskurahat meri duniya ki sabse
+      khoobsurat cheez hai. Hamesha aapka, [Your Name] ''' }}
+    </div>
+
+    <div class="letter-footer">
+      <div class="seal"></div>
+    </div>
+  </div>
+
+  <button class="new-letter-btn" onclick="getNewLetter()">Naya Khat 📜</button>
+</div>
+
+<script>
+  function getNewLetter() {
+    window.location.reload();
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block content %}
+<div class="home-container">
+  <header class="romantic-header">
+    <h1>Meri Jaan, Aapka Din Mubarak Ho! 💖</h1>
+    <p class="current-date">
+      {{ now.strftime('%A, %d %B %Y') if now else '' }}
+    </p>
+  </header>
+
+  <div class="daily-message-section">
+    <div class="image-container fade-in">
+      <img src="{{ image }}" alt="Romantic Image" class="daily-image" />
+      <div class="image-overlay">
+        <p class="romantic-message">{{ message }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="quick-features">
+    <div
+      class="feature-card"
+      onclick="location.href='{{ url_for('love_letter') }}'"
+    >
+      <div class="feature-icon">💌</div>
+      <h3>Aapke Naam Khat</h3>
+      <p>Aapke liye khaas sandesh</p>
+    </div>
+
+    <div
+      class="feature-card"
+      onclick="location.href='{{ url_for('reasons') }}'"
+    >
+      <div class="feature-icon">❣️</div>
+      <h3>Kyun Pyaar Karta Hoon</h3>
+      <p>Aapki khoobsurati ke karan</p>
+    </div>
+
+    <div class="feature-card" onclick="location.href='{{ url_for('gift') }}'">
+      <div class="feature-icon">🎁</div>
+      <h3>Aapke Liye Tohfa</h3>
+      <p>Kuch khaas aapke liye</p>
+    </div>
+  </div>
+
+  <div class="love-meter">
+    <h3>Aapke Liye Mera Pyaar</h3>
+    <div class="meter-container">
+      <div class="meter-fill" style="width: 100%"></div>
+    </div>
+    <p class="meter-text">Hamesha 100% aur badhta hi ja raha hai! 💕</p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,470 @@
+{% extends "base.html" %} {% block content %}
+<div class="gift-page">
+  <div class="gift-header">
+    <h1>Aapke Liye Kuch Khaas 🎀</h1>
+    <p class="romantic-subtitle">Yeh tohfa meri taraf se aapke liye hai</p>
+  </div>
+
+  <div class="gift-section">
+    <div class="gift-wrapper">
+      <div class="gift-box" onclick="openGift()">
+        <div class="gift-lid"></div>
+        <div class="gift-body">
+          <div class="gift-bow">
+            <div class="bow-center"></div>
+            <div class="bow-loop left"></div>
+            <div class="bow-loop right"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gift-instruction">
+        <p>🎁 Gift ko open karne ke liye click karein</p>
+      </div>
+    </div>
+
+    <div class="gift-content" id="giftContent">
+      <div class="surprise-content">
+        <div class="surprise-image">
+          <div class="heart-container">💖</div>
+        </div>
+
+        <div class="surprise-message">
+          <h3>Meri Jaan Ke Liye 💝</h3>
+          <div class="message-content handwritten">
+            <p>
+              Aapko yeh chota sa tohfa dekar mere dil ko bahut khushi mil rahi
+              hai.
+            </p>
+            <p>
+              Aap mere liye sirf ek shaks nahi, aap to meri har khushi ka sabaab
+              ho, meri har muskurahat ki wajah ho, meri zindagi ki sabse
+              khoobsurat haqeeqat ho.
+            </p>
+            <p>
+              Yeh tohfa meri mohabbat ka ek chota sa izhaar hai. Umeed hai aapko
+              pasand aayega.
+            </p>
+          </div>
+
+          <div class="surprise-poem">
+            <h4>Meri Mohabbat Ka Izhaar 🌹</h4>
+            <p class="handwritten">
+              Khushboo si hai aapki yaadon ki, Mehka karti hai meri duniya,
+              Aapki muskurahat hai woh baat, Jo har gum ko bhula deti hai... Aap
+              ho meri har khushi, Aap ho meri har dua, Aap bin toh hai zindagi,
+              Ek adhoori si kahaani...
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gift-actions">
+        <button onclick="createRomanticMoment()" class="romantic-btn">
+          💖 Romantic Moment Banayein
+        </button>
+        <button onclick="shareLove()" class="share-btn">
+          📤 Pyaar Banteyn
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="floating-hearts"></div>
+</div>
+
+<style>
+  .gift-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fff5f7 0%, #fce4ec 50%, #f8bbd9 100%);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .gift-header h1 {
+    font-family: "Dancing Script", cursive;
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .romantic-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    opacity: 0.8;
+  }
+
+  .gift-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    margin-top: 2rem;
+  }
+
+  .gift-wrapper {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+
+  .gift-box {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #e91e63 0%, #ad1457 100%);
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .gift-box:hover {
+    transform: scale(1.05);
+  }
+
+  .gift-lid {
+    width: 220px;
+    height: 40px;
+    background: linear-gradient(135deg, #f8bbd9 0%, #e91e63 100%);
+    position: absolute;
+    top: -40px;
+    left: -10px;
+    border-radius: 10px 10px 0 0;
+    transition: all 0.5s ease;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .gift-body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gift-bow {
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+
+  .bow-center {
+    width: 30px;
+    height: 30px;
+    background: #ffeb3b;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+  .bow-loop {
+    width: 40px;
+    height: 60px;
+    background: #ffeb3b;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .bow-loop.left {
+    left: -20px;
+    transform: translateY(-50%) rotate(-30deg);
+  }
+
+  .bow-loop.right {
+    right: -20px;
+    transform: translateY(-50%) rotate(30deg);
+  }
+
+  .gift-instruction {
+    margin-top: 2rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+  .gift-content {
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+  }
+
+  .gift-content.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .surprise-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--primary-color);
+  }
+
+  .heart-container {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+
+  .surprise-message h3 {
+    color: var(--primary-color);
+    font-family: "Dancing Script", cursive;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .message-content {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+
+  .surprise-poem {
+    background: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-top: 2rem;
+  }
+
+  .surprise-poem h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-family: "Dancing Script", cursive;
+    font-size: 1.8rem;
+  }
+
+  .gift-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .romantic-btn,
+  .share-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+  }
+
+  .romantic-btn:hover,
+  .share-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px var(--glow-color);
+  }
+
+  .share-btn {
+    background: var(--accent-color);
+  }
+
+  .floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* Gift opening animations */
+  .gift-box.open {
+    transform: scale(1.1);
+  }
+
+  .gift-box.open .gift-lid {
+    transform: translateY(-100px) rotate(-20deg);
+    opacity: 0;
+  }
+
+  @keyframes heartbeat {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+</style>
+
+<script>
+  let giftOpened = false;
+
+  function openGift() {
+    if (giftOpened) return;
+
+    const giftBox = document.querySelector(".gift-box");
+    const giftContent = document.getElementById("giftContent");
+
+    giftBox.classList.add("open");
+    giftOpened = true;
+
+    // Show content after animation
+    setTimeout(() => {
+      giftContent.classList.add("show");
+
+      // Create celebration effects
+      createCelebration();
+
+      // Play romantic sound if available
+      playRomanticSound();
+    }, 1000);
+  }
+
+  function createCelebration() {
+    // Create floating hearts
+    for (let i = 0; i < 20; i++) {
+      setTimeout(() => {
+        createFloatingHeart();
+      }, i * 100);
+    }
+
+    // Create burst effect
+    if (window.romanticAnimations) {
+      window.romanticAnimations.createConfetti();
+    }
+  }
+
+  function createFloatingHeart() {
+    const heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.style.cssText = `
+        position: fixed;
+        font-size: ${Math.random() * 20 + 15}px;
+        left: ${Math.random() * 100}%;
+        top: 100%;
+        animation: floatUp ${Math.random() * 3 + 2}s ease-in forwards;
+        pointer-events: none;
+        z-index: 9999;
+    `;
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 3000);
+  }
+
+  function playRomanticSound() {
+    // You can add a romantic sound here
+    console.log("Romantic celebration sound would play here");
+  }
+
+  function createRomanticMoment() {
+    // Create a special romantic animation
+    const romanticText = document.createElement("div");
+    romanticText.innerHTML = "Aap Meri Jaan Ho! 💕";
+    romanticText.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: 'Dancing Script', cursive;
+        font-size: 3rem;
+        color: var(--primary-color);
+        z-index: 10000;
+        animation: romanticText 3s ease-out forwards;
+        text-shadow: 0 0 20px var(--glow-color);
+    `;
+
+    document.body.appendChild(romanticText);
+
+    setTimeout(() => {
+      romanticText.remove();
+    }, 3000);
+  }
+
+  function shareLove() {
+    // Create sharing animation
+    const shareEffect = document.createElement("div");
+    shareEffect.innerHTML = "Pyaar Banta Hai! 💝";
+    shareEffect.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--primary-color);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 25px;
+        font-size: 1.5rem;
+        z-index: 10000;
+        animation: sharePulse 2s ease-out forwards;
+    `;
+
+    document.body.appendChild(shareEffect);
+
+    setTimeout(() => {
+      shareEffect.remove();
+    }, 2000);
+  }
+
+  // Add additional animations to style
+  const giftAnimations = document.createElement("style");
+  giftAnimations.textContent = `
+    @keyframes floatUp {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes romanticText {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.2);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes sharePulse {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.1);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+        }
+    }
+`;
+  document.head.appendChild(giftAnimations);
+
+  document.addEventListener("DOMContentLoaded", function () {
+    initGiftAnimations();
+  });
+</script>
+{% endblock %}

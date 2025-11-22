@@ -1,0 +1,659 @@
+{% extends "base.html" %} {% block content %}
+<div class="memory-page">
+  <div class="memory-header">
+    <h1>Humari Yaadein 📦</h1>
+    <p class="romantic-subtitle">Khaas pal jo hamesha dil mein rahenge</p>
+  </div>
+
+  <div class="memory-vault">
+    <div class="vault-description">
+      <p class="handwritten">
+        Yeh mystery boxes aapke liye khaas yaadein lekar aaye hain. Har box
+        kholkar ek nayi yaad ya pyaar bhara sandesh paayein.
+      </p>
+    </div>
+
+    <div class="boxes-grid" id="boxesGrid">
+      <!-- Memory boxes will be generated here -->
+    </div>
+  </div>
+
+  <div class="memory-modal" id="memoryModal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeMemory()">×</button>
+      <div class="modal-body" id="modalBody">
+        <!-- Memory content will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <div class="memory-stats">
+    <div class="stat-card">
+      <div class="stat-number" id="openedBoxes">0</div>
+      <div class="stat-label">Khole Hue Box</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="totalBoxes">0</div>
+      <div class="stat-label">Total Box</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="specialMemories">0</div>
+      <div class="stat-label">Khaas Yaadein</div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .memory-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
+    padding: 2rem;
+  }
+
+  .memory-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .memory-header h1 {
+    font-family: "Dancing Script", cursive;
+    font-size: 3rem;
+    color: #1565c0;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .romantic-subtitle {
+    color: #1976d2;
+    font-size: 1.2rem;
+    opacity: 0.8;
+  }
+
+  .vault-description {
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid #bbdefb;
+  }
+
+  .handwritten {
+    font-family: "Dancing Script", cursive;
+    font-size: 1.3rem;
+    line-height: 1.6;
+  }
+
+  .boxes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .memory-box {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 3px solid #bbdefb;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .memory-box:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .memory-box.locked {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .memory-box.locked:hover {
+    transform: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .box-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .box-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1565c0;
+    margin-bottom: 0.5rem;
+  }
+
+  .box-description {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .box-status {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    display: inline-block;
+  }
+
+  .status-locked {
+    background: #ffcdd2;
+    color: #c62828;
+  }
+
+  .status-unlocked {
+    background: #c8e6c9;
+    color: #2e7d32;
+  }
+
+  .box-ribbon {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #e91e63;
+    color: white;
+    padding: 0.5rem 1rem;
+    transform: rotate(45deg);
+    font-size: 0.8rem;
+    width: 100px;
+    text-align: center;
+  }
+
+  .memory-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .memory-modal.show {
+    display: flex;
+  }
+
+  .modal-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    animation: scaleIn 0.3s ease;
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #666;
+    z-index: 1;
+  }
+
+  .close-modal:hover {
+    color: #e91e63;
+  }
+
+  .modal-body {
+    padding: 3rem 2rem 2rem;
+  }
+
+  .memory-content {
+    text-align: center;
+  }
+
+  .memory-image {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .memory-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+
+  .memory-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .action-btn {
+    background: #1565c0;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .action-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(21, 101, 192, 0.3);
+  }
+
+  .memory-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    max-width: 600px;
+    margin: 3rem auto 0;
+  }
+
+  .stat-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #bbdefb;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1565c0;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Special memory box styles */
+  .memory-box.special {
+    border-color: #e91e63;
+    background: linear-gradient(135deg, #fff5f7 0%, #fce4ec 100%);
+  }
+
+  .memory-box.special .box-icon {
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* Unlock animation */
+  @keyframes unlockBox {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1) rotate(5deg);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .memory-box.unlocking {
+    animation: unlockBox 0.5s ease;
+  }
+</style>
+
+<script>
+  // Sample memory boxes data
+  const memoryBoxes = [
+    {
+      id: 1,
+      title: "Pehli Mulaqat",
+      description: "Woh khoobsurat din jab hum mile the",
+      icon: "💫",
+      locked: false,
+      type: "memory",
+      content: {
+        type: "text",
+        title: "Pehli Nazar Ka Pyaar",
+        message: `Woh din aaj bhi yaad hai jab hum pehli baar mile the. Aapki aankhon mein ek alag si chamak thi, 
+            aapki muskurahat ne mera dil jeet liya tha. Us din se main jaanta tha ki aap kuch khaas ho...
+            
+            Aapki woh pehli muskurahat aaj bhi mere dil mein mehkti hai, jaise kal ki hi baat ho.`,
+        image: "static/img/first_meet.jpg",
+      },
+      special: true,
+    },
+    {
+      id: 2,
+      title: "Aapki Muskurahat",
+      description: "Meri duniya ki sabse khoobsurat cheez",
+      icon: "😊",
+      locked: false,
+      type: "compliment",
+      content: {
+        type: "text",
+        title: "Aapki Hansi Ki Duniya",
+        message: `Aapki muskurahat mere liye sabse khoobsurat tohfa hai. Jab aap muskurate hain, 
+            lagta hai jaise poori duniya roshan ho gayi hai...
+            
+            Aapki har muskurahat mere dil ko chhoo jaati hai, har hansi meri duniya ko khushiyon se bhar deti hai.`,
+        image: "static/img/smile_memory.jpg",
+      },
+    },
+    {
+      id: 3,
+      title: "Pyaar Bhari Raatein",
+      description: "Lamhe jo kabhi nahi bhoolenge",
+      icon: "🌙",
+      locked: true,
+      type: "memory",
+      content: {
+        type: "text",
+        title: "Raaton Ki Baatein",
+        message: `Woh raatein jab hum saari raat baatein karte the, har baat mein naya pyaar milta tha...
+            
+            Aaj bhi woh raatein yaad aati hain to dil khush ho jaata hai, jaise koi khoobsurat sapna ho.`,
+        image: "static/img/night_memory.jpg",
+      },
+    },
+    {
+      id: 4,
+      title: "Surprise Moments",
+      description: "Anokhe pal jo dil ko chho gaye",
+      icon: "🎁",
+      locked: true,
+      type: "surprise",
+      content: {
+        type: "text",
+        title: "Khushiyon Ke Pal",
+        message: `Har surprise moment mere liye khaas hai, kyunki woh aapke pyaar ka izhaar hai...
+            
+            Aapke diye hue har surprise ne mera dil jeeta hai, har pal ko main hamesha yaad rakhunga.`,
+        image: "static/img/surprise_memory.jpg",
+      },
+    },
+    {
+      id: 5,
+      title: "Sapno Ki Udaan",
+      description: "Humare shared dreams aur hopes",
+      icon: "🌈",
+      locked: true,
+      type: "dream",
+      content: {
+        type: "text",
+        title: "Humare Sapno Ki Duniya",
+        message: `Aapke saath bitane waale kal jaise humare sabse khoobsurat sapne hain...
+            
+            Har sapna aapke saath poora karna chahta hoon, har manzil aapke saath tay karna chahta hoon.`,
+        image: "static/img/dream_memory.jpg",
+      },
+    },
+    {
+      id: 6,
+      title: "Chhoti Chhoti Khushiyan",
+      description: "Wo chhote pal jo bade hai",
+      icon: "✨",
+      locked: true,
+      type: "memory",
+      content: {
+        type: "text",
+        title: "Khushiyon Ke Lamhe",
+        message: `Zindagi ki chhoti chhoti khushiyan aapke saath double ho jaati hain...
+            
+            Chai ki pyali ho ya saath bitaya koi pal, har lamha aapke saath khaas ban jaata hai.`,
+        image: "static/img/small_joys.jpg",
+      },
+    },
+  ];
+
+  let openedBoxes = 0;
+
+  function initializeMemoryBoxes() {
+    const boxesGrid = document.getElementById("boxesGrid");
+    const openedBoxesElement = document.getElementById("openedBoxes");
+    const totalBoxesElement = document.getElementById("totalBoxes");
+    const specialMemoriesElement = document.getElementById("specialMemories");
+
+    // Clear existing boxes
+    boxesGrid.innerHTML = "";
+
+    // Create memory boxes
+    memoryBoxes.forEach((box) => {
+      const boxElement = document.createElement("div");
+      boxElement.className = `memory-box ${box.locked ? "locked" : ""} ${
+        box.special ? "special" : ""
+      }`;
+      boxElement.innerHTML = `
+            ${box.special ? '<div class="box-ribbon">Khaas</div>' : ""}
+            <span class="box-icon">${box.icon}</span>
+            <div class="box-title">${box.title}</div>
+            <div class="box-description">${box.description}</div>
+            <div class="box-status ${
+              box.locked ? "status-locked" : "status-unlocked"
+            }">
+                ${box.locked ? "🔒 Locked" : "🔓 Unlocked"}
+            </div>
+        `;
+
+      if (!box.locked) {
+        boxElement.addEventListener("click", () => openMemoryBox(box));
+      }
+
+      boxesGrid.appendChild(boxElement);
+    });
+
+    // Update stats
+    openedBoxes = memoryBoxes.filter((box) => !box.locked).length;
+    openedBoxesElement.textContent = openedBoxes;
+    totalBoxesElement.textContent = memoryBoxes.length;
+    specialMemoriesElement.textContent = memoryBoxes.filter(
+      (box) => box.special
+    ).length;
+  }
+
+  function openMemoryBox(box) {
+    const modal = document.getElementById("memoryModal");
+    const modalBody = document.getElementById("modalBody");
+
+    // Create memory content based on type
+    let contentHTML = "";
+
+    if (box.content.type === "text") {
+      contentHTML = `
+            <div class="memory-content">
+                <h2>${box.content.title}</h2>
+                ${
+                  box.content.image
+                    ? `<img src="${box.content.image}" alt="${box.title}" class="memory-image">`
+                    : ""
+                }
+                <div class="memory-text handwritten">${
+                  box.content.message
+                }</div>
+                <div class="memory-actions">
+                    <button class="action-btn" onclick="markAsFavorite(${
+                      box.id
+                    })">💖 Favorite</button>
+                    <button class="action-btn" onclick="shareMemory(${
+                      box.id
+                    })">📤 Share</button>
+                </div>
+            </div>
+        `;
+    }
+
+    modalBody.innerHTML = contentHTML;
+    modal.classList.add("show");
+
+    // Add unlock animation to box
+    const boxElement = document.querySelector(
+      `.memory-box:nth-child(${memoryBoxes.indexOf(box) + 1})`
+    );
+    boxElement.classList.add("unlocking");
+    setTimeout(() => boxElement.classList.remove("unlocking"), 500);
+
+    // Create celebration for opening special boxes
+    if (box.special) {
+      createSpecialCelebration();
+    }
+  }
+
+  function closeMemory() {
+    const modal = document.getElementById("memoryModal");
+    modal.classList.remove("show");
+  }
+
+  function markAsFavorite(boxId) {
+    const box = memoryBoxes.find((b) => b.id === boxId);
+    alert(`"${box.title}" ko favorites mein add kar diya! 💖`);
+
+    // Create heart animation
+    createHeartAnimation();
+  }
+
+  function shareMemory(boxId) {
+    const box = memoryBoxes.find((b) => b.id === boxId);
+    alert(
+      `"${
+        box.title
+      }" memory share ki gayi! 📤\n\n${box.content.message.substring(
+        0,
+        100
+      )}...`
+    );
+  }
+
+  function createHeartAnimation() {
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => {
+        const heart = document.createElement("div");
+        heart.innerHTML = "💖";
+        heart.style.cssText = `
+                position: fixed;
+                font-size: 20px;
+                left: 50%;
+                top: 50%;
+                animation: heartBurst 1s ease-out forwards;
+                pointer-events: none;
+                z-index: 10000;
+            `;
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 1000);
+      }, i * 200);
+    }
+  }
+
+  function createSpecialCelebration() {
+    // Create special celebration for important memories
+    if (window.romanticAnimations) {
+      window.romanticAnimations.createConfetti();
+    }
+
+    // Create floating stars
+    for (let i = 0; i < 10; i++) {
+      setTimeout(() => {
+        const star = document.createElement("div");
+        star.innerHTML = "⭐";
+        star.style.cssText = `
+                position: fixed;
+                font-size: 25px;
+                left: ${Math.random() * 100}%;
+                top: 100%;
+                animation: starFloat 3s ease-in forwards;
+                pointer-events: none;
+                z-index: 9999;
+            `;
+
+        document.body.appendChild(star);
+
+        setTimeout(() => star.remove(), 3000);
+      }, i * 300);
+    }
+  }
+
+  // Add memory-specific animations to style
+  const memoryAnimations = document.createElement("style");
+  memoryAnimations.textContent = `
+    @keyframes heartBurst {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 1;
+        }
+        50% {
+            transform: translate(${Math.random() * 100 - 50}px, ${
+    Math.random() * 100 - 50
+  }px) scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(${Math.random() * 200 - 100}px, ${
+    Math.random() * 200 - 100
+  }px) scale(0);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes starFloat {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+`;
+  document.head.appendChild(memoryAnimations);
+
+  document.addEventListener("DOMContentLoaded", function () {
+    initializeMemoryBoxes();
+  });
+</script>
+{% endblock %}

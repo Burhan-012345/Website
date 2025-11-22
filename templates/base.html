@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meri Duniya - Aapke Liye</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/animations.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="theme-rose">
+    <!-- Rose Petals Container -->
+    <div id="rosePetals"></div>
+
+    <!-- Floating Compliments -->
+    <div id="floatingCompliments"></div>
+
+    <!-- Music Toggle -->
+    <div class="music-toggle">
+      <button id="musicToggle" onclick="toggleMusic()">🎵 Music Off</button>
+    </div>
+
+    <!-- Theme Selector -->
+    <div class="theme-selector">
+      <button onclick="changeTheme('rose')">🌹 Rose</button>
+      <button onclick="changeTheme('midnight')">🌙 Midnight</button>
+      <button onclick="changeTheme('pink')">💗 Pink</button>
+      <button onclick="changeTheme('gold')">🕯️ Gold</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">{% block content %}{% endblock %}</div>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+      <a href="{{ url_for('home') }}">🏠 Home</a>
+      <a href="{{ url_for('love_letter') }}">💌 Letter</a>
+      <a href="{{ url_for('reasons') }}">❣️ Reasons</a>
+      <a href="{{ url_for('star') }}">⭐ Star</a>
+      <a href="{{ url_for('gift') }}">🎁 Gift</a>
+      <a href="{{ url_for('quiz') }}">💘 Quiz</a>
+      <a href="{{ url_for('memory') }}">📦 Memory</a>
+    </nav>
+
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop>
+      <source
+        src="{{ url_for('static', filename='audio/romantic.mp3') }}"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/animations.js') }}"></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

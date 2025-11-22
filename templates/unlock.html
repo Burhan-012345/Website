@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unlock My Heart</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/animations.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="unlock-screen">
+    <div id="rosePetals"></div>
+    <div class="unlock-container">
+      <div class="heart-glow"></div>
+      <h1 class="romantic-title">Meri Duniya Mein Aapka Swagat Hai</h1>
+      <p class="romantic-subtitle">
+        Aapke liye kuch khaas hai... Kripya password enter karein
+      </p>
+
+      <div class="password-display">
+        <input
+          type="text"
+          id="passwordInput"
+          readonly
+          placeholder="DD-MM-YYYY"
+        />
+      </div>
+
+      <div class="numeric-keyboard">
+        <div class="key-row">
+          <button class="num-key" data-key="1">1</button>
+          <button class="num-key" data-key="2">2</button>
+          <button class="num-key" data-key="3">3</button>
+        </div>
+        <div class="key-row">
+          <button class="num-key" data-key="4">4</button>
+          <button class="num-key" data-key="5">5</button>
+          <button class="num-key" data-key="6">6</button>
+        </div>
+        <div class="key-row">
+          <button class="num-key" data-key="7">7</button>
+          <button class="num-key" data-key="8">8</button>
+          <button class="num-key" data-key="9">9</button>
+        </div>
+        <div class="key-row">
+          <button class="num-key clear" data-key="clear">Clear</button>
+          <button class="num-key" data-key="0">0</button>
+          <button class="num-key unlock" data-key="unlock">🔓</button>
+        </div>
+      </div>
+
+      <div id="unlockMessage" class="message"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/unlock.js') }}"></script>
+  </body>
+</html>

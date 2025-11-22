@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading Love...</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/animations.css') }}"
+    />
+  </head>
+  <body class="loading-screen">
+    <div class="loading-container">
+      <div class="heartbeat"></div>
+      <div class="rose-petals-loading"></div>
+      <h2 class="loading-text">Loading Pyaar...</h2>
+      <p class="loading-subtext">Aapki yaadon ko saja raha hoon</p>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="romantic-quote">
+        "Aapki aankhon mein base ho hum, aapki yaadon mein kho gaye hum..."
+      </div>
+    </div>
+
+    <script>
+      // Wait for 3 seconds then redirect to home
+      setTimeout(function () {
+        window.location.href = "{{ url_for('home') }}";
+      }, 3000);
+
+      // Add some romantic messages while loading
+      const messages = [
+        "Aapki yaadon ko collect kar raha hoon...",
+        "Pyaar ki files load kar raha hoon...",
+        "Dil ki dhadkan arrange kar raha hoon...",
+        "Mohabbat ka mahaul bana raha hoon...",
+      ];
+
+      let currentMessage = 0;
+      const subtext = document.querySelector(".loading-subtext");
+
+      setInterval(() => {
+        currentMessage = (currentMessage + 1) % messages.length;
+        subtext.textContent = messages[currentMessage];
+      }, 800);
+    </script>
+  </body>
+</html>
